@@ -2,6 +2,12 @@
   "expo": {
     "name": "prismagram-app",
     "slug": "prismagram-app",
+    "sdkVersion":"38.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
