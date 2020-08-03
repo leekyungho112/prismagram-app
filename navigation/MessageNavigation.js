@@ -1,8 +1,15 @@
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Messages from "../screens/Messages/Messages";
 import Message from "../screens/Messages/Message";
+import { stackStyles } from "./config";
 
-export default createStackNavigator({
-    Messages,
-    Message
-});
+const Stack = createStackNavigator();
+
+export default () => (
+    <Stack.Navigator screenOptions={{headerStyle: {...stackStyles}}}
+     headerMode="none" mode="modal">
+      <Stack.Screen name="Message" component={Message} />
+      <Stack.Screen name="Messages" component={Messages} />
+    </Stack.Navigator>
+  );
