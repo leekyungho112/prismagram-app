@@ -2,9 +2,24 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import useInput from "../../hooks/useInput";
+import { gql } from "apollo-boost";
 import { Alert, Image, ActivityIndicator } from "react-native";
 import styles from "../../styles";
 import constants from "../../constants";
+import { useMutation } from "react-apollo-hooks";
+import { FEED_QUERY } from "../Tabs/Home";
+
+const UPLOAD = gql`
+   mutation upload($caption: String!, $location:String, $files: [String!]!){
+    upload(caption: $caption, location:$location, files: $files){
+      id
+      caption
+      location
+    }
+   }
+
+`;
+
 
 const View = styled.View`
  
@@ -40,13 +55,19 @@ const Text = styled.Text`
   font-weight: 600;
 `;
 
-export default ({  route }) => {
+export default ({ navigation, route }) => {
     
       const [loading, setIsLoading] = useState(false);
-      const [fileUrl, setFileUrl] = useState("");
       const photo = route.params.photo;
       const captionInput = useInput("");
       const locationInput = useInput("");
+      const [uploadMutation] = useMutation(UPLOAD, {
+          refetchQueries: () => [{ query: FEED_QUERY}]
+        
+      });
+      
+      
+      
       const handleSubmit = async() => {
         if (captionInput.value === "" || locationInput.value === "") {
           Alert.alert("모든 항목을 기입해주세요");
@@ -60,18 +81,32 @@ export default ({  route }) => {
         uri: photo.uri
         });
       try {
+      setIsLoading(true);
       const {
-        data: { path }
+        data: { location }
       } = await axios.post("http://192.168.0.7:4000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data"
         }
       });
-      setFileUrl(path);
+      const {
+        data: { upload }
+      } = await uploadMutation({
+        variables: {
+          files: [location],
+          caption: captionInput.value,
+          location: locationInput.value
+        }
+      });
+      if (upload.id) {
+        navigation.navigate("Home");
+      }
     } catch (e) {
-      Alert.alert("Cant upload", "Try later");
+      Alert.alert("업로드 할수 없습니다. 다시시도해주세요");
+    }finally {
+      setIsLoading(false);
     }
-      };
+  };
  return(
   <View>
     <Container>

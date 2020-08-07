@@ -24,7 +24,7 @@ const AuthInput = ({
     onChange,
     onSubmitEditing  = () => null,
     autoCorrect = true,
-    secureTextEntry = true
+  
 
     }) => (
     <Container>
@@ -36,7 +36,7 @@ const AuthInput = ({
     autoCapitalize={autoCapitalize}
     onSubmitEditing  ={onSubmitEditing}
     autoCorrect ={autoCorrect}
-    secureTextEntry= {secureTextEntry}
+   
     value={value}/>
     </Container>
 

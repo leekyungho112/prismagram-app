@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Image, View, TouchableOpacity} from "react-native";
+import {Image, View, TouchableOpacity, ScrollView} from "react-native";
 import styled from "styled-components";
 import { Ionicons } from "@expo/vector-icons"; 
 import PropTypes from "prop-types";
@@ -8,16 +8,20 @@ import { Platform } from "@unimodules/core";
 import styles from "../styles";
 import SquarePhoto from "./SquarePhoto";
 import Post from "./Post";
+import { withNavigation } from "@react-navigation/compat";
+
 
 const ProfileHeader = styled.View`
   padding: 20px;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
 `;
 const HeaderColumn = styled.View``;
 
 const ProfileStats = styled.View`
+  margin-right: 50px;
   flex-direction: row;
 `;
 
@@ -37,11 +41,15 @@ const StatName = styled.Text`
 `;
 
 const ProfileMeta = styled.View`
-  margin-top: 10px; 
+  margin-left: 20px; 
  padding-horizontal: 20px;
 `;
 
 const Bio = styled.Text``;
+
+const Text = styled.Text`
+
+`;
 
 const ButtonContainer = styled.View`
   padding-vertical: 5px;
@@ -55,14 +63,23 @@ const Button = styled.View`
   align-items: center;
 `;
 
-const UserProfile = ({
+const EditButton = styled.TouchableOpacity`
+  background-color: ${props => props.theme.lightGreyColor};
+  padding: 10px;
+  border-radius: 4px;
+  align-items: center;
+  justify-content: center;
+`;
+
+const UserProfile  = ({
     avatar,
     postsCount,
     followersCount,
     followingCount,
     bio,
     fullName,
-    posts
+    posts,
+    navigation
 }) =>    {
     const [isGrid, setIsGrid] = useState(true);
     const toggleGrid = () => setIsGrid(i => !i);
@@ -90,7 +107,11 @@ const UserProfile = ({
       <ProfileMeta>
           <Bold>{fullName}</Bold>
           <Bio>{bio}</Bio>
+      <EditButton onPress={()=> navigation.navigate("EditProfile")}>
+        <Text>프로필 수정</Text>
+      </EditButton>
       </ProfileMeta>
+     
       <ButtonContainer>
       <TouchableOpacity onPress={toggleGrid}>
         <Button>
@@ -111,6 +132,7 @@ const UserProfile = ({
         </Button>
       </TouchableOpacity>
     </ButtonContainer>
+    <ScrollView contentContainerStyle={{ flexWrap: "wrap", flexDirection: "row" }}>
     {posts &&
         posts.map(p =>
           isGrid ? (
@@ -119,6 +141,7 @@ const UserProfile = ({
             <Post key={p.id} {...p} />
           )
         )}
+     </ScrollView>   
     </View>
       
     );
@@ -167,4 +190,4 @@ UserProfile.propTypes = {
     })
   )
 };
-export default UserProfile;
+export default withNavigation(UserProfile);

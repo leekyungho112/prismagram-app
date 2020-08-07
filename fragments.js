@@ -33,6 +33,8 @@ export const USER_FRAGMENT = gql`
     id
     avatar
     username
+    firstName
+    lastName
     fullName
     isFollowing
     isSelf

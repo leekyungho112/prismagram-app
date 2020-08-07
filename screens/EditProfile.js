@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { ScrollView, RefreshControl } from "react-native";
 import { gql } from "apollo-boost";
-import { USER_FRAGMENT } from "../../fragments";
-import Loader from "../../components/Loader";
+import { USER_FRAGMENT } from "../fragments";
+import Loader from "../components/Loader";
 import { useQuery } from "react-apollo-hooks";
-import UserProfile from "../../components/UserProfile";
+import EditUsers from "../components/EditUsers";
+
 
 export const ME = gql`
   {
@@ -33,7 +34,7 @@ export default ({ navigation }) => {
 
   return (
     <ScrollView refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing} />}>
-      {loading ? <Loader /> : data && data.me && <UserProfile {...data.me} />}
+      {loading ? <Loader /> : data && data.me && <EditUsers {...data.me} />}
     </ScrollView>
   );
 };

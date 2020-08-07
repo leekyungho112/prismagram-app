@@ -13,6 +13,7 @@ import { stackStyles } from "./config";
 import Detail from "../screens/Detail";
 import styles from "../styles";
 import UserDetail from "../screens/UserDetail";
+import EditProfile from "../screens/EditProfile";
 
 
 
@@ -33,6 +34,11 @@ const stackFactory = (initialRoute, name, customConfig) => (
       options={{ ...customConfig}}
    />
    <Stack.Screen name="Detail" component={Detail}  options={{title:'Photo'}}
+   screenOptions={{
+     headerTintColor: styles.blackColor,
+     headerStyle:  {...stackStyles}}} />
+   <Stack.Screen name="EditProfile" component={EditProfile}  options={{title:'프로필 편집',
+   headerBackTitle:'취소'}}
    screenOptions={{
      headerTintColor: styles.blackColor,
      headerStyle:  {...stackStyles}}} />
@@ -116,6 +122,7 @@ export default () => (
         stackFactory(Profile, "Profile", {
           title: "Profile",
           tabBarOptions:{
+            
             showLabel: false,
       style: {
         backgroundColor: "#FAFAFA"
