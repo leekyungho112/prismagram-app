@@ -9,6 +9,9 @@ import constants from "../constants";
 import styles from "../styles";
 import { useMutation } from "react-apollo-hooks";
 import { withNavigation } from "@react-navigation/compat";
+import Comment from "./Comment";
+
+
 
 export const TOGGLE_LIKE = gql`
 mutation toggelLike($postId: String!) {
@@ -43,6 +46,9 @@ const IconContainer = styled.View`
 `;
 const InfoContainer = styled.View`
     padding: 10px;
+`;
+const CommentList = styled.View`
+margin-right: 10px;
 `;
 
 const Caption = styled.Text`
@@ -164,7 +170,7 @@ const Post = ({
               : "md-heart-empty"} />
               </IconContainer>  
           </Touchable>
-          <Touchable>
+          <Touchable onPress={()=> navigation.navigate("Comments",{id : id})}>
               <IconContainer>
               <Ionicons size={24}
               color={styles.blackColor} 
@@ -173,15 +179,23 @@ const Post = ({
               </IconContainer>  
           </Touchable>
       </IconsContainer>
-        <Touchable><Bold>{likeCount === 1 ? "좋아요 1 " : `${likeCount} 좋아요` }</Bold></Touchable>
+        <Touchable><Bold>{likeCount === 1 ? "좋아요 1 " : `좋아요 ${likeCount} 개 ` }</Bold></Touchable>
             <Touchable>
              <Caption><Bold>{user.username}</Bold> {caption}</Caption>
             </Touchable>
-            <Touchable >
+            <Touchable onPress={()=> navigation.navigate("Comments",{id : id})} >
                <CommentCount>
                     댓글 {comments.length}개 보기
                </CommentCount>
+             <CommentList> 
+            {comments.slice(0,1).map(comment => (
+                <Comment key={comment.id}
+                text={comment.text}
+                writer={comment.user.username} />
+            ))}
+            </CommentList> 
             </Touchable>   
+         
        </InfoContainer>
     </Container>
   );

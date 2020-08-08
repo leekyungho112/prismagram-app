@@ -30,6 +30,8 @@ const Stat = styled.View`
   margin-left: 40px;
 `;
 
+const Touchable = styled.TouchableOpacity``;
+
 const Bold = styled.Text`
   font-weight: 600;
 `;
@@ -93,14 +95,18 @@ const UserProfile  = ({
                   <Bold>{postsCount}</Bold>
                   <StatName>게시물</StatName>
               </Stat>
+              <Touchable onPress={()=> navigation.navigate("Followers")}>
               <Stat>
                   <Bold>{followersCount}</Bold>
                   <StatName>팔로워</StatName>
               </Stat>
+              </Touchable>
+              <Touchable onPress={()=> navigation.navigate("Followers")}>
               <Stat>
                   <Bold>{followingCount}</Bold>
                   <StatName>팔로잉</StatName>
               </Stat>
+              </Touchable>
           </ProfileStats>
       </HeaderColumn>
       </ProfileHeader>

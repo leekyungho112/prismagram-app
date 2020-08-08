@@ -14,6 +14,7 @@ import Detail from "../screens/Detail";
 import styles from "../styles";
 import UserDetail from "../screens/UserDetail";
 import EditProfile from "../screens/EditProfile";
+import Comments from "../screens/Comments";
 
 
 
@@ -34,6 +35,10 @@ const stackFactory = (initialRoute, name, customConfig) => (
       options={{ ...customConfig}}
    />
    <Stack.Screen name="Detail" component={Detail}  options={{title:'Photo'}}
+   screenOptions={{
+     headerTintColor: styles.blackColor,
+     headerStyle:  {...stackStyles}}} />
+   <Stack.Screen name="Comments" component={Comments}  options={{title:'댓글'}}
    screenOptions={{
      headerTintColor: styles.blackColor,
      headerStyle:  {...stackStyles}}} />
