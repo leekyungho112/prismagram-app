@@ -22,10 +22,13 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "host.exp.exponent"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "android": {
+      "package": "host.exp.exponent"
     }
   }
 }
