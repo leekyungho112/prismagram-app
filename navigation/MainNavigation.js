@@ -4,11 +4,15 @@ import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigation from "./TabNavigation";
 import PhotoNavigation from "./PhotoNavigation";
 import MessageNavigation from "./MessageNavigation";
+import FollowerNavigation from "./FollowerNavigation";
 import { stackStyles } from "./config";
-import Detail from "../screens/Detail";
+
+
+
 const Stack = createStackNavigator();
 
 const MainNavigation = () => {
+ 
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -17,8 +21,8 @@ const MainNavigation = () => {
         <Stack.Screen name="취소" component={TabNavigation} />
         <Stack.Screen name="PhotoNavigation" component={PhotoNavigation} />
         <Stack.Screen name="MessageNavigation" component={MessageNavigation} />
-   
-      </Stack.Navigator>
+        <Stack.Screen name="FollowerNavigation" component={FollowerNavigation} />
+        </Stack.Navigator>
     </NavigationContainer>
   );
 };

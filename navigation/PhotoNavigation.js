@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 const PhotoTabs = () => {
   return (
     <Tab.Navigator tabBarPosition="bottom">
-      <Tab.Screen name="SelectPhoto" component={SelectPhoto} options={
+      <Tab.Screen name="SelectPhoto" component={SelectPhoto}  options={
         { tabBarLabel: '라이브러리'}
       } />
       <Tab.Screen name="TakePhoto" component={TakePhoto} options={
@@ -32,7 +32,7 @@ export default () => (
     }    
     }
    >
-    <Stack.Screen name="PhotoTabs" component={PhotoTabs} options={{
+    <Stack.Screen name="PhotoTabs" component={PhotoTabs}  options={{
       title: '사진함'
     }} />
     <Stack.Screen name="UploadPhoto" component={UploadPhoto} options={{

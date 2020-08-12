@@ -82,7 +82,7 @@ const AllComment = ({
                    style={{ height: 30, width: 30, borderRadius: 20, marginLeft: 5 }}
                    source={{ uri: user.avatar }}
                    />}                     
-                       writer={comment.user.username}
+                   username={comment.user.username}
                        text={comment.text}
                   />
             ))}

@@ -9,6 +9,8 @@ import styles from "../styles";
 import SquarePhoto from "./SquarePhoto";
 import Post from "./Post";
 import { withNavigation } from "@react-navigation/compat";
+import FollowButton from "../components/FollowButton";
+
 
 
 const ProfileHeader = styled.View`
@@ -74,15 +76,22 @@ const EditButton = styled.TouchableOpacity`
 `;
 
 const UserProfile  = ({
+    id,
     avatar,
     postsCount,
     followersCount,
     followingCount,
+    username,
     bio,
     fullName,
+    isSelf,
+    isFollowing,
     posts,
     navigation
+   
+    
 }) =>    {
+    
     const [isGrid, setIsGrid] = useState(true);
     const toggleGrid = () => setIsGrid(i => !i);
     return  (
@@ -91,17 +100,18 @@ const UserProfile  = ({
       <Image style={{height:80, width:80, borderRadius:40}} source={{ uri: avatar}} />
       <HeaderColumn>
           <ProfileStats>
+          
               <Stat>
                   <Bold>{postsCount}</Bold>
                   <StatName>게시물</StatName>
               </Stat>
-              <Touchable onPress={()=> navigation.navigate("Followers")}>
+              <Touchable onPress={()=> navigation.navigate('Followers',{username: username})}>
               <Stat>
                   <Bold>{followersCount}</Bold>
                   <StatName>팔로워</StatName>
               </Stat>
               </Touchable>
-              <Touchable onPress={()=> navigation.navigate("Followers")}>
+              <Touchable onPress={()=> navigation.navigate('Followings',{username: username})}>
               <Stat>
                   <Bold>{followingCount}</Bold>
                   <StatName>팔로잉</StatName>
@@ -113,9 +123,10 @@ const UserProfile  = ({
       <ProfileMeta>
           <Bold>{fullName}</Bold>
           <Bio>{bio}</Bio>
+      {isSelf ? (   
       <EditButton onPress={()=> navigation.navigate("EditProfile")}>
         <Text>프로필 수정</Text>
-      </EditButton>
+      </EditButton>) : (<FollowButton id={id} isFollowing={isFollowing} />)}
       </ProfileMeta>
      
       <ButtonContainer>

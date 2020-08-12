@@ -191,7 +191,7 @@ const Post = ({
             {comments.slice(0,1).map(comment => (
                 <Comment key={comment.id}
                 text={comment.text}
-                writer={comment.user.username} />
+                username={comment.user.username} />
             ))}
             </CommentList> 
             </Touchable>   

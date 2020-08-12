@@ -34,13 +34,13 @@ const Text = styled.Text`
    margin-top: 10px;
 `;
 
-export default ({ writer, text , user =[] }) => (
+export default ({ username, text , user =[] }) => (
  
  
  <Container>
       <Comments>
       <UserCard>{user}</UserCard>
-      <Bold>{writer}</Bold>
+      <Bold>{username}</Bold>
       <Text>{text}</Text>
       </Comments>
       <Ionicons size={12}

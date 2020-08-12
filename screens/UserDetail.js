@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-apollo-hooks";
 import { gql } from "apollo-boost";
 import { USER_FRAGMENT } from "../fragments";
 import Loader from "../components/Loader";
-import { ScrollView } from "react-native";
+import { ScrollView, RefreshControl } from "react-native";
 import UserProfile from "../components/UserProfile";
 
 const GET_USER = gql`
@@ -16,13 +16,23 @@ const GET_USER = gql`
 `;
 
 export default ({ navigation,route }) => {
-  const { loading, data } = useQuery(GET_USER, {
+  const [refreshing, setRefreshing] = useState(false);
+  const { loading, data, refetch } = useQuery(GET_USER, {
     variables: { username: route.params.username }
     
   });
-  console.log(data);
+  const onRefresh = async () => {
+    try {
+      setRefreshing(true);
+      await refetch();
+    } catch (e) {
+    } finally {
+      setRefreshing(false);
+    }
+  };
+  
   return (
-    <ScrollView>
+    <ScrollView refreshControl={<RefreshControl onRefresh={onRefresh} refreshing={refreshing}/>}>
       {loading ? (
         <Loader />
       ) : (

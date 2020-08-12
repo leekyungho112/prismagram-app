@@ -15,8 +15,8 @@ import styles from "../styles";
 import UserDetail from "../screens/UserDetail";
 import EditProfile from "../screens/EditProfile";
 import Comments from "../screens/Comments";
-
-
+import Followers from "../screens/Followers";
+import Followings from "../screens/Followings";
 
 const ImageView = styled.View`
     justify-content: center;
@@ -34,7 +34,7 @@ const stackFactory = (initialRoute, name, customConfig) => (
       component={initialRoute}
       options={{ ...customConfig}}
    />
-   <Stack.Screen name="Detail" component={Detail}  options={{title:'Photo'}}
+   <Stack.Screen name="Detail" component={Detail}  options={{title:'게시물'}}
    screenOptions={{
      headerTintColor: styles.blackColor,
      headerStyle:  {...stackStyles}}} />
@@ -47,7 +47,18 @@ const stackFactory = (initialRoute, name, customConfig) => (
    screenOptions={{
      headerTintColor: styles.blackColor,
      headerStyle:  {...stackStyles}}} />
-   <Stack.Screen name="UserDetail" component={UserDetail} options={{title: 'user'}} 
+    <Stack.Screen name="Followers" component={Followers}  options={{title:'팔로우',
+   headerBackTitle:'취소'}}
+   screenOptions={{
+     headerTintColor: styles.blackColor,
+     headerStyle:  {...stackStyles}}} />
+   <Stack.Screen name="Followings" component={Followings}  options={{title:'팔로우',
+   headerBackTitle:'취소'}}
+   screenOptions={{
+     headerTintColor: styles.blackColor,
+     headerStyle:  {...stackStyles}}} />
+  
+   <Stack.Screen name="UserDetail" component={UserDetail} options={{title: '계정'}} 
    screenOptions={    {    
            
             headerBackTitle:null,
@@ -116,7 +127,7 @@ export default () => (
         }}>
       {() =>
         stackFactory(Notifications, "Notifications", {
-          title: "Notifications",
+          title: "알림",
         })
       }
     </Tab.Screen>
@@ -125,7 +136,7 @@ export default () => (
         }}>
       {() =>
         stackFactory(Profile, "Profile", {
-          title: "Profile",
+          title: "사용자",
           tabBarOptions:{
             
             showLabel: false,
@@ -137,6 +148,8 @@ export default () => (
       }
     </Tab.Screen>
   
+
+   
   </Tab.Navigator>
 
 
