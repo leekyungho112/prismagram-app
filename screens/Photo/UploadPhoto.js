@@ -77,7 +77,7 @@ export default ({ navigation, route }) => {
         const [, type] = name.split(".");
          formData.append("file", {
          name,
-         type: type.toLowerCase(),
+         type: "image/jpeg",
         uri: photo.uri
         });
       try {
