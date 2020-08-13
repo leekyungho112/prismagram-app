@@ -84,7 +84,7 @@ export default ({ navigation, route }) => {
       setIsLoading(true);
       const {
         data: { location }
-      } = await axios.post("https://keanghogram-backend.herokuapp.com/", formData, {
+      } = await axios.post("https://keanghogram-backend.herokuapp.com/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data"
         }
